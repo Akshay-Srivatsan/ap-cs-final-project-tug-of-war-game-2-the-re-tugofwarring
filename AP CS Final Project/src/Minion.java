@@ -51,5 +51,6 @@ public abstract class Minion
 		return direction;
 	}
 	
+	public abstract void draw();
 	
 }
