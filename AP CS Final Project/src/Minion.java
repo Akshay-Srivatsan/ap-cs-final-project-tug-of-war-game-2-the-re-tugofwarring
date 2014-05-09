@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.awt.Point;
 
 /**
@@ -12,7 +13,7 @@ public abstract class Minion
 	private Point location;
 	private double direction;
 	private int health;
-	private int speed;
+	private double speed;
 	public int damage;
 
 	/**
@@ -75,6 +76,15 @@ public abstract class Minion
 	{
 		health = _health;
 	}
+	
+	/**
+	 * Sets the speed of the Minion
+	 * @param _speed
+	 */
+	public void setSpeed(double _speed)
+	{
+		speed = _speed;
+	}
 
 	/**
 	 * Gets the current location of the Minion
@@ -105,6 +115,15 @@ public abstract class Minion
 	{
 		return direction;
 	}
+	
+	/**
+	 * Sets the speed of the Minion
+	 * @param _speed
+	 */
+	public double getSpeed()
+	{
+		return speed;
+	}
 
 	/**
 	 * Deals damage to the Minion, and tells the Minion to die if necessary.
@@ -131,11 +150,17 @@ public abstract class Minion
 	 * getLocation() as the center, with direction provided by getDirection().
 	 * The implementation should also display health in some way.
 	 */
-	public abstract void draw();
+	public abstract void draw(Graphics g);
 
 	/**
 	 * Tells the Minion to die.
 	 */
 	public abstract void die();
+	
+	/**
+	 * Gets the amount of damage this Minion does.
+	 */
+	public abstract int getDamage();
+	
 
 }
