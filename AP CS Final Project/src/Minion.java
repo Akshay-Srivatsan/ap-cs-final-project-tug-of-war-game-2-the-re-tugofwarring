@@ -111,7 +111,7 @@ public abstract class Minion
 	 *            The amount of damage to deal.
 	 * @return true iff the Minion died (health <= 0)
 	 */
-	public boolean dealDamage(int amount)
+	public boolean receiveDamage(int amount)
 	{
 		health -= amount;
 		if (health <= 0)
