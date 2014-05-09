@@ -12,6 +12,8 @@ public abstract class Minion
 	private Point location;
 	private double direction;
 	private int health;
+	private int speed;
+	public int damage;
 
 	/**
 	 * Constructs a Minion with a location of (-1, -1), direction of -1, and a
@@ -121,6 +123,8 @@ public abstract class Minion
 		}
 		return false;
 	}
+	
+	
 
 	/**
 	 * Tells the Minion to draw itself. Should use the location provided by
