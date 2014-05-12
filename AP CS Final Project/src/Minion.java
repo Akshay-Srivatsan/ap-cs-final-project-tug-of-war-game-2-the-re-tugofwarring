@@ -157,7 +157,11 @@ public abstract class Minion
 			return null;
 		for (Minion i : world)
 		{
-			
+			double distance = location.distance(i.location);
+			if (distance < location.distance(m.location))
+			{
+				m = i;
+			}
 		}
 		return m;
 	}
