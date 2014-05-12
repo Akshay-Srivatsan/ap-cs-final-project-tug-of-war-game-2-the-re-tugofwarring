@@ -13,24 +13,8 @@ public abstract class Minion
 {
 	private Point location;
 	private double direction;
-	private int health;
-	private double speed;
-	private int damage;
 	private List<Minion> world;
 	private Minion target;
-
-	/**
-	 * Constructs a Minion with a location of (-1, -1), direction of -1, and a
-	 * health of -1. All values should be set later using mutators.
-	 */
-	public Minion()
-	{
-		location = new Point(-1, -1);
-		direction = -1;
-		health = 1;
-		speed = 1;
-		damage = 1;
-	}
 
 	/**
 	 * Constructs a minion with the given parameters.
@@ -42,11 +26,10 @@ public abstract class Minion
 	 * @param _health
 	 *            The starting health.
 	 */
-	public Minion(Point _loc, double _dir, int _health, int _speed, int _damage)
+	public Minion(Point _loc, double _dir)
 	{
 		location = _loc;
 		direction = _dir;
-		health = _health;
 	}
 
 	/**
@@ -77,19 +60,13 @@ public abstract class Minion
 	 * @param _health
 	 *            The new health
 	 */
-	public void setHealth(int _health)
-	{
-		health = _health;
-	}
+	public abstract void setHealth(int _health);
 	
 	/**
 	 * Sets the speed of the Minion
-	 * @param _speed
+	 * @param speed
 	 */
-	public void setSpeed(double _speed)
-	{
-		speed = _speed;
-	}
+	public abstract void setSpeed(double speed);
 
 	/**
 	 * Gets the current location of the Minion
@@ -106,10 +83,7 @@ public abstract class Minion
 	 * 
 	 * @return The current health
 	 */
-	public int getHealth()
-	{
-		return health;
-	}
+	public abstract int getHealth();
 
 	/**
 	 * Gets the current direction.
@@ -125,10 +99,7 @@ public abstract class Minion
 	 * Sets the speed of the Minion
 	 * @param _speed
 	 */
-	public double getSpeed()
-	{
-		return speed;
-	}
+	public abstract double getSpeed();
 
 	/**
 	 * Deals damage to the Minion, and tells the Minion to die if necessary.
@@ -139,8 +110,8 @@ public abstract class Minion
 	 */
 	public boolean takeDamage(int amount)
 	{
-		health -= amount;
-		if (health <= 0)
+		setHealth(getHealth()-1);
+		if (getHealth() <= 0)
 		{
 			die();
 			return true;
@@ -194,9 +165,12 @@ public abstract class Minion
 	 */
 	public abstract int getDamage();
 	
+	/**
+	 * Moves the Minion
+	 */
 	public void move()
 	{
-		
+		double dX; 
 	}
 	
 
