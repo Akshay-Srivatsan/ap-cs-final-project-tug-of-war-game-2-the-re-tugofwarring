@@ -1,5 +1,6 @@
 import java.awt.Graphics;
 import java.awt.Point;
+import java.util.List;
 
 /**
  * The Minion class represents any game element with a location, direction, and
@@ -14,7 +15,9 @@ public abstract class Minion
 	private double direction;
 	private int health;
 	private double speed;
-	public int damage;
+	private int damage;
+	private List<Minion> world;
+	private Minion target;
 
 	/**
 	 * Constructs a Minion with a location of (-1, -1), direction of -1, and a
@@ -24,7 +27,9 @@ public abstract class Minion
 	{
 		location = new Point(-1, -1);
 		direction = -1;
-		health = -1;
+		health = 1;
+		speed = 1;
+		damage = 1;
 	}
 
 	/**
@@ -37,7 +42,7 @@ public abstract class Minion
 	 * @param _health
 	 *            The starting health.
 	 */
-	public Minion(Point _loc, double _dir, int _health)
+	public Minion(Point _loc, double _dir, int _health, int _speed, int _damage)
 	{
 		location = _loc;
 		direction = _dir;
@@ -132,7 +137,7 @@ public abstract class Minion
 	 *            The amount of damage to deal.
 	 * @return true iff the Minion died (health <= 0)
 	 */
-	public boolean receiveDamage(int amount)
+	public boolean takeDamage(int amount)
 	{
 		health -= amount;
 		if (health <= 0)
@@ -143,7 +148,30 @@ public abstract class Minion
 		return false;
 	}
 	
+	public Minion findMinion()
+	{
+		Minion m;
+		if (world != null || world.size() != 0)
+			m = world.get(0);
+		else
+			return null;
+		for (Minion i : world)
+		{
+			
+		}
+		return m;
+	}
 	
+	/**
+	 * Sets the targeted Minion
+	 * @param m
+	 */
+	public void setTarget(Minion m)
+	{
+		target = m;
+	}
+	
+	public abstract void attack();
 
 	/**
 	 * Tells the Minion to draw itself. Should use the location provided by
@@ -161,6 +189,11 @@ public abstract class Minion
 	 * Gets the amount of damage this Minion does.
 	 */
 	public abstract int getDamage();
+	
+	public void move()
+	{
+		
+	}
 	
 
 }
