@@ -33,6 +33,14 @@ public class World extends JFrame implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent arg0) 
 	{
+		for (Minion m : playerMinions)
+		{
+			m.move();
+		}
+		for (Minion m : enemyMinions)
+		{
+			m.move();
+		}
 		repaint();
 	}
 
@@ -49,5 +57,15 @@ public class World extends JFrame implements ActionListener
 			m.draw(g);
 		}
     }
+	
+	public ArrayList<Minion> getEnemyMinions()
+	{
+		return enemyMinions;
+	}
+	
+	public ArrayList<Minion> getPlayerMinions()
+	{
+		return playerMinions;
+	}
 	
 }
