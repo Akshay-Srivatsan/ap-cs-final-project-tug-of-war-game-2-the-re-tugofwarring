@@ -26,10 +26,10 @@ public abstract class Minion
 	 * @param _health
 	 *            The starting health.
 	 */
-	public Minion(Point _loc, double _dir)
+	public Minion(Point loc, double dir)
 	{
-		location = _loc;
-		direction = _dir;
+		location = loc;
+		direction = dir;
 	}
 
 	/**
@@ -170,7 +170,9 @@ public abstract class Minion
 	 */
 	public void move()
 	{
-		double dX; 
+		int dX = (int) Math.round(Math.cos(direction));
+		int dY = (int) Math.round(Math.sin(direction));
+		location.translate(dX, dY);
 	}
 	
 
