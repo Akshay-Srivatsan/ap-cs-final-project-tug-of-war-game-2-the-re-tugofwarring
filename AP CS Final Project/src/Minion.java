@@ -13,7 +13,7 @@ public abstract class Minion
 {
 	private Point location;
 	private double direction;
-	private List<Minion> world;
+	private List<Minion> enemyList;
 	private Minion target;
 
 	/**
@@ -26,10 +26,11 @@ public abstract class Minion
 	 * @param _health
 	 *            The starting health.
 	 */
-	public Minion(Point loc, double dir)
+	public Minion(Point loc, double dir, List<Minion> enemies)
 	{
 		location = loc;
 		direction = dir;
+		enemyList = enemies;
 	}
 
 	/**
@@ -119,14 +120,18 @@ public abstract class Minion
 		return false;
 	}
 	
+	/**
+	 * Finds a Minion to target. May be overriden.
+	 * @return The minion to target.
+	 */
 	public Minion findMinion()
 	{
 		Minion m;
-		if (world != null || world.size() != 0)
-			m = world.get(0);
+		if (enemyList != null || enemyList.size() != 0)
+			m = enemyList.get(0);
 		else
 			return null;
-		for (Minion i : world)
+		for (Minion i : enemyList)
 		{
 			double distance = location.distance(i.location);
 			if (distance < location.distance(m.location))
@@ -144,6 +149,16 @@ public abstract class Minion
 	public void setTarget(Minion m)
 	{
 		target = m;
+	}
+	
+	public Minion getTarget()
+	{
+		return target;
+	}
+	
+	public List<Minion> getEnemies()
+	{
+		return enemyList;
 	}
 	
 	public abstract void attack();
