@@ -151,16 +151,27 @@ public abstract class Minion
 		target = m;
 	}
 	
+	/**
+	 * Gets the current target of the Minion
+	 * @return the current target, or null if there is none
+	 */
 	public Minion getTarget()
 	{
 		return target;
 	}
 	
+	/**
+	 * Gets the list of enemies.
+	 * @return The list of enemies.
+	 */
 	public List<Minion> getEnemies()
 	{
 		return enemyList;
 	}
 	
+	/**
+	 * Attacks the current target. If there is no target, the behavior is undefined.
+	 */
 	public abstract void attack();
 
 	/**
