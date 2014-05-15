@@ -8,11 +8,9 @@ public class MeleeMinion extends Minion
 	int health;
 	int speed;
 	int damage;
-	public MeleeMinion(Point loc, double dir, List<Minion> enemies, int _health, int _speed)
+	public MeleeMinion(Point loc, double dir, List<Minion> enemies)
 	{
 		super(loc, dir, enemies);
-		health = _health;
-		speed = _speed;
 	}
 
 	@Override
@@ -47,7 +45,7 @@ public class MeleeMinion extends Minion
 	public void attack() 
 	{
 		Minion toAttack = findMinion();
-		
+		toAttack.setHealth(toAttack.getHealth() - damage);
 	}
 
 	@Override
