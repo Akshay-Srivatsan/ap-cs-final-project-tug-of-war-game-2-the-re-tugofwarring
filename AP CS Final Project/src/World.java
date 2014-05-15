@@ -14,6 +14,9 @@ public class World extends JFrame implements ActionListener
 	ArrayList<Minion> playerMinions = new ArrayList<Minion>();
 	ArrayList<Minion> enemyMinions = new ArrayList<Minion>();
 	
+	ArrayList<Tower> playerTowers = new ArrayList<Tower>();
+	ArrayList<Tower> enemyTowers = new ArrayList<Tower>();
+	
 	public World(int gridWidthIn, int gridHeightIn)
 	{
 		gridHeight = gridHeightIn;
@@ -41,6 +44,14 @@ public class World extends JFrame implements ActionListener
 		{
 			m.move();
 		}
+		for (Tower t : playerTowers)
+		{
+			t.spawn();
+		}
+		for (Tower t : enemyTowers)
+		{
+			t.spawn();
+		}
 		repaint();
 	}
 
@@ -55,6 +66,14 @@ public class World extends JFrame implements ActionListener
 		for (Minion m : enemyMinions)
 		{
 			m.draw(g);
+		}
+		for (Tower t : playerTowers)
+		{
+			t.draw(g);
+		}
+		for (Tower t : enemyTowers)
+		{
+			t.draw(g);
 		}
     }
 	
