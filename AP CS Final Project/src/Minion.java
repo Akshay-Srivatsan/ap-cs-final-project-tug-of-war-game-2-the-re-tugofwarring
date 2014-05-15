@@ -19,12 +19,12 @@ public abstract class Minion
 	/**
 	 * Constructs a minion with the given parameters.
 	 * 
-	 * @param _loc
+	 * @param loc
 	 *            The location (using a point in (x,y) format).
-	 * @param _dir
+	 * @param dir
 	 *            The direction.
-	 * @param _health
-	 *            The starting health.
+	 * @param enemies
+	 *            The list of enemies.
 	 */
 	public Minion(Point loc, double dir, List<Minion> enemies)
 	{
@@ -67,7 +67,7 @@ public abstract class Minion
 	 * Sets the speed of the Minion
 	 * @param speed
 	 */
-	public abstract void setSpeed(double speed);
+	public abstract void setSpeed(int speed);
 
 	/**
 	 * Gets the current location of the Minion
@@ -97,10 +97,10 @@ public abstract class Minion
 	}
 	
 	/**
-	 * Sets the speed of the Minion
-	 * @param _speed
+	 * Gets the speed of the Minion
+	 * @return the speed
 	 */
-	public abstract double getSpeed();
+	public abstract int getSpeed();
 
 	/**
 	 * Deals damage to the Minion, and tells the Minion to die if necessary.
@@ -196,8 +196,8 @@ public abstract class Minion
 	 */
 	public void move()
 	{
-		int dX = (int) Math.round(Math.cos(direction));
-		int dY = (int) Math.round(Math.sin(direction));
+		int dX = getSpeed() * (int) Math.round(Math.cos(direction));
+		int dY = getSpeed() * (int) Math.round(Math.sin(direction));
 		location.translate(dX, dY);
 	}
 	
