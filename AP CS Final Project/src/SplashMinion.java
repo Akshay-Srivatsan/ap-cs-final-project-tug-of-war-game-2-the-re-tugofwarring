@@ -12,7 +12,6 @@ public class SplashMinion extends MeleeMinion
 	
 	public void attack()
 	{
-		for (Minion i )
 	}
 	
 }
