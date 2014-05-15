@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.awt.Point;
 
 public class RangedTower extends Tower
@@ -35,7 +36,7 @@ public class RangedTower extends Tower
 		}
 	}
 	
-	public void draw()
+	public void draw(Graphics g)
 	{
 		
 	}

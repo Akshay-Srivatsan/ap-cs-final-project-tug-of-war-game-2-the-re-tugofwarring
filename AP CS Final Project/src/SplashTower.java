@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.awt.Point;
 
 public class SplashTower extends Tower
@@ -24,18 +25,18 @@ public class SplashTower extends Tower
 	public Minion spawn()
 	{
 		count ++;
+		if (count == 100000000)
+		{
+			count = 0;
+		}
 		if (count % (wait - level) == 0)
 		{
 			Minion minion = new SplashMinion();
 			return minion;
 		}
-		if (count == 100000000)
-		{
-			count = 0;
-		}
 	}
 	
-	public void draw()
+	public void draw(Graphics g)
 	{
 		
 	}

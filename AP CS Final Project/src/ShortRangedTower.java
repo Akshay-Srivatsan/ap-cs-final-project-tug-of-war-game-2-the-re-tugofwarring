@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.awt.Point;
 
 public class ShortRangedTower extends Tower
@@ -29,7 +30,7 @@ public class ShortRangedTower extends Tower
 		}
 	}
 	
-	public void draw()
+	public void draw(Graphics g)
 	{
 		
 	}

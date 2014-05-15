@@ -1,4 +1,5 @@
 
+import java.awt.Graphics;
 import java.awt.Point;
 
 public abstract class Tower
@@ -28,7 +29,7 @@ public abstract class Tower
 		
 	}
 	
-	public void draw()
+	public void draw(Graphics g)
 	{
 		
 	}
