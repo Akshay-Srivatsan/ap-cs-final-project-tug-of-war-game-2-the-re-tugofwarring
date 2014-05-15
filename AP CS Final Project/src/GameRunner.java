@@ -1,10 +1,15 @@
+import javax.swing.Timer;
+import javax.xml.stream.events.StartDocument;
+
 
 public class GameRunner
 {
 
+	public static World w;
+	
 	public static void main(String[] args)
 	{
-		// TODO Auto-generated method stub
+		w = new World(500,600);
 	}
 
 }

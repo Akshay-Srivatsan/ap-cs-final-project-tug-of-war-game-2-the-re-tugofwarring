@@ -1,4 +1,6 @@
+import java.awt.Graphics;
 import java.awt.Point;
+import java.util.List;
 
 /**
  * The Minion class represents any game element with a location, direction, and
@@ -11,20 +13,8 @@ public abstract class Minion
 {
 	private Point location;
 	private double direction;
-	private int health;
-	private int speed;
-	public int damage;
-
-	/**
-	 * Constructs a Minion with a location of (-1, -1), direction of -1, and a
-	 * health of -1. All values should be set later using mutators.
-	 */
-	public Minion()
-	{
-		location = new Point(-1, -1);
-		direction = -1;
-		health = -1;
-	}
+	private List<Minion> enemyList;
+	private Minion target;
 
 	/**
 	 * Constructs a minion with the given parameters.
@@ -36,11 +26,11 @@ public abstract class Minion
 	 * @param _health
 	 *            The starting health.
 	 */
-	public Minion(Point _loc, double _dir, int _health)
+	public Minion(Point loc, double dir, List<Minion> enemies)
 	{
-		location = _loc;
-		direction = _dir;
-		health = _health;
+		location = loc;
+		direction = dir;
+		enemyList = enemies;
 	}
 
 	/**
@@ -71,10 +61,13 @@ public abstract class Minion
 	 * @param _health
 	 *            The new health
 	 */
-	public void setHealth(int _health)
-	{
-		health = _health;
-	}
+	public abstract void setHealth(int _health);
+	
+	/**
+	 * Sets the speed of the Minion
+	 * @param speed
+	 */
+	public abstract void setSpeed(double speed);
 
 	/**
 	 * Gets the current location of the Minion
@@ -91,10 +84,7 @@ public abstract class Minion
 	 * 
 	 * @return The current health
 	 */
-	public int getHealth()
-	{
-		return health;
-	}
+	public abstract int getHealth();
 
 	/**
 	 * Gets the current direction.
@@ -105,6 +95,12 @@ public abstract class Minion
 	{
 		return direction;
 	}
+	
+	/**
+	 * Sets the speed of the Minion
+	 * @param _speed
+	 */
+	public abstract double getSpeed();
 
 	/**
 	 * Deals damage to the Minion, and tells the Minion to die if necessary.
@@ -113,10 +109,10 @@ public abstract class Minion
 	 *            The amount of damage to deal.
 	 * @return true iff the Minion died (health <= 0)
 	 */
-	public boolean receiveDamage(int amount)
+	public boolean takeDamage(int amount)
 	{
-		health -= amount;
-		if (health <= 0)
+		setHealth(getHealth()-1);
+		if (getHealth() <= 0)
 		{
 			die();
 			return true;
@@ -124,18 +120,86 @@ public abstract class Minion
 		return false;
 	}
 	
+	/**
+	 * Finds a Minion to target. May be overriden.
+	 * @return The minion to target.
+	 */
+	public Minion findMinion()
+	{
+		Minion m;
+		if (enemyList != null || enemyList.size() != 0)
+			m = enemyList.get(0);
+		else
+			return null;
+		for (Minion i : enemyList)
+		{
+			double distance = location.distance(i.location);
+			if (distance < location.distance(m.location))
+			{
+				m = i;
+			}
+		}
+		return m;
+	}
 	
+	/**
+	 * Sets the targeted Minion
+	 * @param m
+	 */
+	public void setTarget(Minion m)
+	{
+		target = m;
+	}
+	
+	/**
+	 * Gets the current target of the Minion
+	 * @return the current target, or null if there is none
+	 */
+	public Minion getTarget()
+	{
+		return target;
+	}
+	
+	/**
+	 * Gets the list of enemies.
+	 * @return The list of enemies.
+	 */
+	public List<Minion> getEnemies()
+	{
+		return enemyList;
+	}
+	
+	/**
+	 * Attacks the current target. If there is no target, the behavior is undefined.
+	 */
+	public abstract void attack();
 
 	/**
 	 * Tells the Minion to draw itself. Should use the location provided by
 	 * getLocation() as the center, with direction provided by getDirection().
 	 * The implementation should also display health in some way.
 	 */
-	public abstract void draw();
+	public abstract void draw(Graphics g);
 
 	/**
 	 * Tells the Minion to die.
 	 */
 	public abstract void die();
+	
+	/**
+	 * Gets the amount of damage this Minion does.
+	 */
+	public abstract int getDamage();
+	
+	/**
+	 * Moves the Minion
+	 */
+	public void move()
+	{
+		int dX = (int) Math.round(Math.cos(direction));
+		int dY = (int) Math.round(Math.sin(direction));
+		location.translate(dX, dY);
+	}
+	
 
 }
