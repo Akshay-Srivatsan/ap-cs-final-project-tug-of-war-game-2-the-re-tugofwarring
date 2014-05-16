@@ -1,24 +1,17 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class MeleeMinion extends Minion
 {
-	int health;
-	int speed;
-	int damage;
-	int attackRange;
-	Color color;
-	int sightRange;
-	public MeleeMinion(Point loc, double dir, List<Minion> enemies, Color _color)
+	int health = 10;
+	int speed = 4;
+	int damage = 5;
+	public MeleeMinion(Point loc, double dir, List<Minion> enemies, Color color)
 	{
-		super(loc, dir, enemies);
-		color = _color;
-		attackRange = 2;
-		sightRange = 200;
+		super(loc, dir, enemies, color);
 	}
 
 	@Override
@@ -31,12 +24,14 @@ public class MeleeMinion extends Minion
 	@Override
 	public void setSpeed(int _speed) 
 	{
+		// TODO Auto-generated method stub
 		speed = _speed;
 	}
 
 	@Override
 	public int getHealth() 
 	{
+		// TODO Auto-generated method stub
 		return health;
 	}
 
@@ -50,48 +45,12 @@ public class MeleeMinion extends Minion
 	@Override
 	public void attack() 
 	{
-		Minion target = getTarget();
-		if(target == null)
-		{
-			
-		}
-	}
-	
-	public void findTarget()
-	{
-		List<Minion> enemies = getEnemies();
-		ArrayList<Minion> enemiesInSight = new ArrayList<Minion>();
-		for(Minion enemy: enemies)
-		{
-			if(enemy.getLocation().distance(getLocation()) < sightRange)
-			{
-				enemiesInSight.add(enemy);
-			}
-		}
-		if(enemiesInSight.size() > 0)
-		{
-			Minion closestEnemy = enemiesInSight.get(0);
-			for(Minion enemy: enemiesInSight)
-			{
-				if(enemy.getLocation().distance(getLocation()) > closestEnemy.getLocation().distance(getLocation()))
-				{
-					closestEnemy = enemy;
-				}
-			}
-			setTarget(closestEnemy);
-		}
+		Minion toAttack = findMinion();
+		toAttack.setHealth(toAttack.getHealth() - damage);
 	}
 
 	@Override
-	public void draw(Graphics g) 
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void die()
-	{
+	public void die() {
 		// TODO Auto-generated method stub
 		
 	}

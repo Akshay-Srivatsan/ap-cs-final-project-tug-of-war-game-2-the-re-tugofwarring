@@ -1,5 +1,7 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.util.List;
 
 public class ShortRangedTower extends Tower
 {
@@ -11,9 +13,9 @@ public class ShortRangedTower extends Tower
 	public int width;
 	public int height;
 	
-	public ShortRangedTower(Point pointIn, int widthIn, int heightIn) 
+	public ShortRangedTower(Point pointIn, int widthIn, int heightIn, List<Minion> enemies) 
 	{
-		super(pointIn, widthIn, heightIn);
+		super(pointIn, widthIn, heightIn, enemies);
 	}
 	
 	public Minion spawn()
@@ -21,13 +23,14 @@ public class ShortRangedTower extends Tower
 		count ++;
 		if (count % (wait - level) == 0)
 		{
-			Minion minion = new ShortRangedMinion();
+			Minion minion = new MeleeMinion(new Point(location.x, location.y), Math.PI/2, getEnemies(), Color.RED); //Added by Akshay
 			return minion;
 		}
 		if (count == 100000000)
 		{
 			count = 0;
 		}
+		return null;
 	}
 	
 	public void draw(Graphics g)

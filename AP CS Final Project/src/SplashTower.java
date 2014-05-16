@@ -1,5 +1,7 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.util.List;
 
 public class SplashTower extends Tower
 {
@@ -11,9 +13,9 @@ public class SplashTower extends Tower
 	public int width;
 	public int height;
 	
-	public SplashTower(Point pointIn, int widthIn, int heightIn) 
+	public SplashTower(Point pointIn, int widthIn, int heightIn, List<Minion> enemies) 
 	{
-		super(pointIn, widthIn, heightIn);
+		super(pointIn, widthIn, heightIn, enemies);
 	}
 	
 	public int removeHealth(int healthRemoved)
@@ -24,16 +26,17 @@ public class SplashTower extends Tower
 	
 	public Minion spawn()
 	{
-		count ++;
-		if (count == 100000000)
+		count++;
+		if (count >= 100000000)
 		{
 			count = 0;
 		}
 		if (count % (wait - level) == 0)
 		{
-			Minion minion = new SplashMinion();
+			Minion minion = new SplashMinion(new Point(location.x, location.y), Math.PI/2, getEnemies(), Color.BLUE); //Added by Akshay
 			return minion;
 		}
+		return null;
 	}
 	
 	public void draw(Graphics g)

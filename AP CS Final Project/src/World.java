@@ -1,15 +1,19 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Insets;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
 public class World extends JFrame implements ActionListener 
 {
-	int gridHeight;
-	int gridWidth;
+	public static int gridHeight;
+	public static int gridWidth;
+	public static Insets insets; //This is used to get the height of the title bar.
 	
 	ArrayList<Minion> playerMinions = new ArrayList<Minion>();
 	ArrayList<Minion> enemyMinions = new ArrayList<Minion>();
@@ -23,8 +27,11 @@ public class World extends JFrame implements ActionListener
 		gridWidth = gridWidthIn;
 		setSize(gridWidth, gridHeight + 22);
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
+        insets = getInsets();
         startTimer();
+        playerMinions.add(new SplashMinion(new Point(100, 100), Math.PI/4, enemyMinions, Color.BLUE));
 	}
 	
 	public void startTimer()
@@ -46,11 +53,15 @@ public class World extends JFrame implements ActionListener
 		}
 		for (Tower t : playerTowers)
 		{
-			t.spawn();
+			Minion m = t.spawn();
+			if (m != null)
+				playerMinions.add(m);
 		}
 		for (Tower t : enemyTowers)
 		{
-			t.spawn();
+			Minion m = t.spawn();
+			if (m != null)
+				enemyMinions.add(m);
 		}
 		repaint();
 	}
