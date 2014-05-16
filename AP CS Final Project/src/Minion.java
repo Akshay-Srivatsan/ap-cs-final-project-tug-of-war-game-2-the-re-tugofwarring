@@ -17,6 +17,8 @@ public abstract class Minion
 	private List<Minion> enemyList;
 	private Minion target;
 	private Color color;
+	private Point eb;
+	private List<Tower> et;
 
 	/**
 	 * Constructs a minion with the given parameters.
@@ -28,11 +30,13 @@ public abstract class Minion
 	 * @param enemies
 	 *            The list of enemies.
 	 */
-	public Minion(Point loc, double dir, List<Minion> enemies, Color color)
+	public Minion(Point loc, double dir, List<Minion> enemies, Point enemyBase, List<Tower> enemyTowers, Color color)
 	{
 		location = loc;
 		direction = dir;
 		enemyList = enemies;
+		eb = enemyBase;
+		et = enemyTowers;
 		setColor(color);
 	}
 
@@ -45,6 +49,16 @@ public abstract class Minion
 	public void setLocation(Point _location)
 	{
 		location = _location;
+	}
+	
+	public Point getEnemyBase()
+	{
+		return eb;
+	}
+	
+	public List<Tower> getEnemyTowers()
+	{
+		return et;
 	}
 
 	/**
@@ -217,28 +231,75 @@ public abstract class Minion
 	 */
 	public abstract int getDamage();
 
+	public void act()
+	{
+		move();
+	}
+
+	public double directionTo(Point point)
+	{
+		double dir = 0;
+
+		Point center = getLocation();
+		int pointX = point.x;
+		int pointY = point.y;
+		int centerX = center.x;
+		int centerY = center.y;
+		double height = pointY - centerY;
+		double base = pointX - centerX;
+		double angle = Math.atan(height / base);
+		return dir;
+	}
+
 	/**
 	 * Moves the Minion
 	 */
 	public void move()
 	{
+		if (direction < 0)
+		{
+			System.out.println(direction);
+			direction += 2 * Math.PI;
+			System.out.println(direction);
+		}
+		else if (direction > 2 * Math.PI)
+		{
+			System.out.println(direction);
+			direction -= 2 * Math.PI;
+			System.out.println(direction);
+		}
 		int dX = getSpeed() * (int) Math.round(Math.cos(direction));
 		int dY = getSpeed() * (int) Math.round(Math.sin(direction));
 		location.translate(dX, dY);
 		if (location.x < 0 || location.x > World.gridWidth || location.y < World.insets.top || location.y > World.gridHeight + World.insets.top)
 			onRunIntoWall();
-
 	}
 
 	public void onRunIntoWall()
 	{
 		if (location.x < 0 || location.x > World.gridWidth)
 		{
-			direction = Math.PI-direction;
+			direction = Math.PI - direction;
+			if (location.x < 0)
+			{
+				location.x = 0;
+			}
+			else
+			{
+				location.x = World.gridWidth;
+			}
 		}
 		if (location.y < World.insets.top || location.y > World.gridHeight + World.insets.top)
 		{
 			direction = -direction;
+			if (location.y < World.insets.top)
+			{
+				location.y += 10;
+			}
+			else
+			{
+				location.y -= 10;
+			}
 		}
 
 	}
