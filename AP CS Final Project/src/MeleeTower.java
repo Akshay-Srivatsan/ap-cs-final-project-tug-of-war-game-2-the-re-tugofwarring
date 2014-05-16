@@ -12,23 +12,30 @@ public class ShortRangedTower extends Tower
 	public Point location;
 	public int width;
 	public int height;
+	public Color color = new Color(225, 255, 0);
 	
 	public ShortRangedTower(Point pointIn, int widthIn, int heightIn, List<Minion> enemies) 
 	{
 		super(pointIn, widthIn, heightIn, enemies);
 	}
 	
+	public int removeHealth(int healthRemoved)
+	{
+		health -= healthRemoved;
+		return health;
+	}
+	
 	public Minion spawn()
 	{
 		count ++;
-		if (count % (wait - level) == 0)
-		{
-			Minion minion = new MeleeMinion(new Point(location.x, location.y), Math.PI/2, getEnemies(), Color.RED); //Added by Akshay
-			return minion;
-		}
 		if (count == 100000000)
 		{
 			count = 0;
+		}
+		if (count % (wait - level) == 0)
+		{
+			Minion minion = new MeleeMinion(new Point(location.x, location.y), Math.PI/2, getEnemies(), color);
+			return minion;
 		}
 		return null;
 	}
