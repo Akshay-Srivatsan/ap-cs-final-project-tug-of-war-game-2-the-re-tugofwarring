@@ -14,9 +14,9 @@ public class MeleeMinion extends Minion
 	Color color;
 	int sightRange;
 	Point basePoint = new Point();
-	public MeleeMinion(Point loc, double dir, List<Minion> enemies, Color _color)
+	public MeleeMinion(Point loc, double dir, List<Minion> enemies, Point enemyBase, List<Tower> buildings, Color _color)
 	{
-		super(loc, dir, enemies, _color);
+		super(loc, dir, enemies, enemyBase, buildings, _color);
 		color = _color;
 		attackRange = 2;
 		sightRange = 200;
@@ -52,6 +52,7 @@ public class MeleeMinion extends Minion
 		Minion target = getTarget();
 		if(target != null)
 		{
+			setDirection(directionTo(target.getLocation()));
 			if(target.getLocation().distance(getLocation()) < attackRange)
 				target.attack();
 			else
