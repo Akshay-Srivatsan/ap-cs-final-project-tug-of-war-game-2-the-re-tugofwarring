@@ -56,7 +56,7 @@ public abstract class Minion
 		return eb;
 	}
 	
-	public List<Minion> getEnemyTowers()
+	public List<Tower> getEnemyTowers()
 	{
 		return et;
 	}
