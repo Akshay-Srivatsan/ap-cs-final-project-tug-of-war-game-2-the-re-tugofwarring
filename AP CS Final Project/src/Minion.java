@@ -216,6 +216,11 @@ public abstract class Minion
 	 * Gets the amount of damage this Minion does.
 	 */
 	public abstract int getDamage();
+	
+	public void act()
+	{
+		move();
+	}
 
 	/**
 	 * Moves the Minion
@@ -227,14 +232,22 @@ public abstract class Minion
 		location.translate(dX, dY);
 		if (location.x < 0 || location.x > World.gridWidth || location.y < World.insets.top || location.y > World.gridHeight + World.insets.top)
 			onRunIntoWall();
-
 	}
 
 	public void onRunIntoWall()
 	{
+		System.out.println(location.x + " " + location.y + " " + direction/Math.PI);
 		if (location.x < 0 || location.x > World.gridWidth)
 		{
 			direction = Math.PI-direction;
+			if (location.x < 0)
+			{
+				location.x = 0;
+			}
+			else
+			{
+				location.x = World.gridWidth;
+			}
 		}
 		if (location.y < World.insets.top || location.y > World.gridHeight + World.insets.top)
 		{
