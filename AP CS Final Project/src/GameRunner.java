@@ -9,7 +9,7 @@ public class GameRunner
 	
 	public static void main(String[] args)
 	{
-		w = new World(500,600);
+		w = new World(1200,800);
 	}
 
 }

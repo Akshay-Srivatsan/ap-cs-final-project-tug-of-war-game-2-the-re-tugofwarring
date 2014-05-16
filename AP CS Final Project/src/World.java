@@ -21,7 +21,7 @@ public class World extends JFrame implements ActionListener
 	{
 		gridHeight = gridHeightIn;
 		gridWidth = gridWidthIn;
-		setSize(gridWidth, gridHeight + 22);
+		setSize(gridWidth, gridHeight);
         setLocationRelativeTo(null);
         setVisible(true);
         startTimer();
@@ -57,8 +57,10 @@ public class World extends JFrame implements ActionListener
 
 	public void paint(Graphics g)
     {
-		g.setColor(Color.WHITE);
+		g.setColor(new Color(100,84,82));
 		g.fillRect(0, 22, gridWidth, gridHeight);
+
+		drawButtons(g);
 		for (Minion m : playerMinions)
 		{
 			m.draw(g);
@@ -76,6 +78,16 @@ public class World extends JFrame implements ActionListener
 			t.draw(g);
 		}
     }
+	
+	public void drawButtons(Graphics g)
+	{
+		g.setColor(new Color(225,255,0));
+		g.fillRect(0, gridHeight-50, gridWidth/3, 50);
+		g.setColor(new Color(225,56,0));
+		g.fillRect(gridWidth/3, gridHeight-50, gridWidth/3, 50);
+		g.setColor(new Color(96,130,182));
+		g.fillRect(2*gridWidth/3, gridHeight-50, gridWidth/3, 50);
+	}
 	
 	public ArrayList<Minion> getEnemyMinions()
 	{
