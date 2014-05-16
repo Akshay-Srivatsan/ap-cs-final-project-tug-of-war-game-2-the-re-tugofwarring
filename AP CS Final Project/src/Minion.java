@@ -17,6 +17,7 @@ public abstract class Minion
 	private List<Minion> enemyList;
 	private Minion target;
 	private Color color;
+	private Point eb;
 
 	/**
 	 * Constructs a minion with the given parameters.
@@ -28,11 +29,12 @@ public abstract class Minion
 	 * @param enemies
 	 *            The list of enemies.
 	 */
-	public Minion(Point loc, double dir, List<Minion> enemies, Color color)
+	public Minion(Point loc, double dir, List<Minion> enemies, Point enemyBase, Color color)
 	{
 		location = loc;
 		direction = dir;
 		enemyList = enemies;
+		eb = enemyBase;
 		setColor(color);
 	}
 
@@ -45,6 +47,11 @@ public abstract class Minion
 	public void setLocation(Point _location)
 	{
 		location = _location;
+	}
+	
+	public Point getEnemyBase()
+	{
+		return eb;
 	}
 
 	/**
