@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.List;
@@ -5,14 +6,12 @@ import java.util.List;
 
 public class MeleeMinion extends Minion
 {
-	int health;
-	int speed;
-	int damage;
-	public MeleeMinion(Point loc, double dir, List<Minion> enemies, int _health, int _speed)
+	int health = 10;
+	int speed = 4;
+	int damage = 5;
+	public MeleeMinion(Point loc, double dir, List<Minion> enemies, Color color)
 	{
-		super(loc, dir, enemies);
-		health = _health;
-		speed = _speed;
+		super(loc, dir, enemies, color);
 	}
 
 	@Override
@@ -37,7 +36,7 @@ public class MeleeMinion extends Minion
 	}
 
 	@Override
-	public double getSpeed() 
+	public int getSpeed() 
 	{
 		// TODO Auto-generated method stub
 		return speed;
@@ -47,14 +46,7 @@ public class MeleeMinion extends Minion
 	public void attack() 
 	{
 		Minion toAttack = findMinion();
-		
-	}
-
-	@Override
-	public void draw(Graphics g) 
-	{
-		// TODO Auto-generated method stub
-		
+		toAttack.setHealth(toAttack.getHealth() - damage);
 	}
 
 	@Override
