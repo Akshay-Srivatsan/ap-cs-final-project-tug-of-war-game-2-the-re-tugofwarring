@@ -21,7 +21,7 @@ public class MeleeMinion extends Minion
 		attackRange = 2;
 		sightRange = 200;
 		damage = 2;
-		speed = 2;
+		setSpeed(2);
 	}
 
 	@Override
