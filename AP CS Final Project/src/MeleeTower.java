@@ -3,7 +3,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.List;
 
-public class ShortRangedTower extends Tower
+public class MeleeTower extends Tower
 {
 	public int health = 1000;
 	public int count = 0;
@@ -14,9 +14,9 @@ public class ShortRangedTower extends Tower
 	public int height;
 	public Color color = new Color(225, 255, 0);
 	
-	public ShortRangedTower(Point pointIn, int widthIn, int heightIn, List<Minion> enemies) 
+	public MeleeTower(Point pointIn, int widthIn, int heightIn, List<Minion> enemies, List<Tower> enemyTowers) 
 	{
-		super(pointIn, widthIn, heightIn, enemies);
+		super(pointIn, widthIn, heightIn, enemies, enemyTowers);
 	}
 	
 	public int removeHealth(int healthRemoved)
@@ -42,6 +42,6 @@ public class ShortRangedTower extends Tower
 	
 	public void draw(Graphics g)
 	{
-		
+		g.fillRect(location.x, location.y, width, height, color);
 	}
 }
