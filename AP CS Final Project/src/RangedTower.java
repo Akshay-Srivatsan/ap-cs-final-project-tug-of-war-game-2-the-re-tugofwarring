@@ -42,6 +42,7 @@ public class RangedTower extends Tower
 	
 	public void draw(Graphics g)
 	{
-		g.fillRect(location.x, location.y, width, height, color);
+		g.setColor(color);
+		g.fillRect(location.x, location.y, width, height);
 	}
 }

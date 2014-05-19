@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MeleeTower extends Tower
@@ -13,9 +14,11 @@ public class MeleeTower extends Tower
 	public int width;
 	public int height;
 	public Color color = new Color(225, 255, 0);
+	ArrayList<Tower> eTowers;
 	
 	public MeleeTower(Point pointIn, int widthIn, int heightIn, List<Minion> enemies, List<Tower> enemyTowers) 
 	{
+		eTowers = enemyTowers;
 		super(pointIn, widthIn, heightIn, enemies, enemyTowers);
 	}
 	
@@ -34,7 +37,7 @@ public class MeleeTower extends Tower
 		}
 		if (count % (wait - level) == 0)
 		{
-			Minion minion = new MeleeMinion(new Point(location.x, location.y), Math.PI/2, getEnemies(), color);
+			Minion minion = new MeleeMinion(new Point(location.x, location.y), Math.PI/2, getEnemies(), color, towers);
 			return minion;
 		}
 		return null;
@@ -42,6 +45,7 @@ public class MeleeTower extends Tower
 	
 	public void draw(Graphics g)
 	{
-		g.fillRect(location.x, location.y, width, height, color);
+		g.setColor(color);
+		g.fillRect(location.x, location.y, width, height);
 	}
 }

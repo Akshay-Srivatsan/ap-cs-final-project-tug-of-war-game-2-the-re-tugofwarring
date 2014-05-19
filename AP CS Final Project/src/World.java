@@ -19,21 +19,21 @@ public class World extends JFrame implements ActionListener, MouseListener, Mous
 {
 	public static int gridHeight;
 	public static int gridWidth;
-	ArrayList<Point> towersArrayList = new ArrayList<Point>();
+	public static ArrayList<Point> towersArrayList = new ArrayList<Point>();
 	public static Insets insets; //This is used to get the height of the title bar.
 	
-	ArrayList<Minion> playerMinions = new ArrayList<Minion>();
-	ArrayList<Minion> enemyMinions = new ArrayList<Minion>();
+	public static ArrayList<Minion> playerMinions = new ArrayList<Minion>();
+	public static ArrayList<Minion> enemyMinions = new ArrayList<Minion>();
 	
-	public boolean placeMelee = false;
-	public boolean placeSplash = false;
-	public boolean placeRanged = false;
+	public static boolean placeMelee = false;
+	public static boolean placeSplash = false;
+	public static boolean placeRanged = false;
 	
-	public int mouseX = 0;
-	public int mouseY = 0;
+	public static int mouseX = 0;
+	public static int mouseY = 0;
 	
-	ArrayList<Tower> playerTowers = new ArrayList<Tower>();
-	ArrayList<Tower> enemyTowers = new ArrayList<Tower>();
+	public static ArrayList<Tower> playerTowers = new ArrayList<Tower>();
+	public static ArrayList<Tower> enemyTowers = new ArrayList<Tower>();
 	
 	public World(int gridWidthIn, int gridHeightIn)
 	{
