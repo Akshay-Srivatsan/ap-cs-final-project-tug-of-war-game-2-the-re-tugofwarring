@@ -210,6 +210,8 @@ public class World extends JFrame implements ActionListener, MouseListener, Mous
 		{
 			if(e.getY() < gridHeight-50)
 			{
+				if (placeMelee == true)
+					MeleeTower t = new MeleeTower(new Point(e.getX() - 5, e.getY() - 5), 10, 10, enemyMinions);
 				towersArrayList.add(new Point(e.getX(), e.getY()));
 			}
 			
