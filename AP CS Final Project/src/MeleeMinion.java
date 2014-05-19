@@ -21,6 +21,7 @@ public class MeleeMinion extends Minion
 		attackRange = 2;
 		sightRange = 200;
 		damage = 2;
+		setSpeed(2);
 	}
 
 	@Override
@@ -104,7 +105,7 @@ public class MeleeMinion extends Minion
 	@Override
 	public void draw(Graphics g) 
 	{
-		
+		super.draw(g);
 	}
 
 	@Override

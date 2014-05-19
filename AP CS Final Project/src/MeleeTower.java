@@ -3,7 +3,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.List;
 
-public class SplashTower extends Tower
+public class MeleeTower extends Tower
 {
 	public int health = 1000;
 	public int count = 0;
@@ -12,9 +12,9 @@ public class SplashTower extends Tower
 	public Point location;
 	public int width;
 	public int height;
-	public Color color = new Color(96, 130, 182);
+	public Color color = new Color(225, 255, 0);
 	
-	public SplashTower(Point pointIn, int widthIn, int heightIn, List<Minion> enemies, List<Tower> enemyTowers)
+	public MeleeTower(Point pointIn, int widthIn, int heightIn, List<Minion> enemies, List<Tower> enemyTowers) 
 	{
 		super(pointIn, widthIn, heightIn, enemies, enemyTowers);
 	}
@@ -27,14 +27,14 @@ public class SplashTower extends Tower
 	
 	public Minion spawn()
 	{
-		count++;
+		count ++;
 		if (count == 100000000)
 		{
 			count = 0;
 		}
 		if (count % (wait - level) == 0)
 		{
-			Minion minion = new SplashMinion(new Point(location.x, location.y), Math.PI/2, getEnemies(), color);
+			Minion minion = new MeleeMinion(new Point(location.x, location.y), Math.PI/2, getEnemies(), color);
 			return minion;
 		}
 		return null;

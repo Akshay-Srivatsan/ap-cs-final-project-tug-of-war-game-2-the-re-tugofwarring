@@ -1,4 +1,3 @@
-
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.List;
@@ -14,7 +13,7 @@ public abstract class Tower
 	public int height;
 	public List<Minion> enemyList;
 	
-	public Tower(Point pointIn, int widthIn, int heightIn, List<Minion> enemies)	
+	public Tower(Point pointIn, int widthIn, int heightIn, List<Minion> enemies, List<Tower> enemyTowers)	
 	{
 		location = pointIn;
 		width = widthIn;
@@ -22,24 +21,16 @@ public abstract class Tower
 		enemyList = enemies;
 	}
 	
-	public int removeHealth() //Modified by Akshay
-	{
-		health = health - 1;
-		return health;
-	}
+	public abstract int removeHealth(int healthRemoved);
 	
-	public Minion spawn()
-	{
-		//TODO Shouldn't this be an abstract method? -- Akshay
-		return null;
-	}
+	public abstract Minion spawn();
 	
 	public void draw(Graphics g)
 	{
 		
 	}
 	
-	public List<Minion> getEnemies() //Added by Akshay
+	public List<Minion> getEnemies()
 	{
 		return enemyList;
 	}
