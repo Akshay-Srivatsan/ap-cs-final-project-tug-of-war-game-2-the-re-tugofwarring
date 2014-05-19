@@ -271,6 +271,7 @@ public abstract class Minion
 		int dX = getSpeed() * (int) Math.round(Math.cos(direction));
 		int dY = getSpeed() * (int) Math.round(Math.sin(direction));
 		location.translate(dX, dY);
+		System.out.println(getDirection() + " " + dX + " " + dY + " " + getSpeed());
 		if (location.x < 0 || location.x > World.gridWidth || location.y < World.insets.top || location.y > World.gridHeight + World.insets.top)
 			onRunIntoWall();
 	}

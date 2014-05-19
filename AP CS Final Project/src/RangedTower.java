@@ -13,9 +13,9 @@ public class RangedTower extends Tower
 	public int width;
 	public int height;
 	
-	public RangedTower(Point pointIn, int widthIn, int heightIn, List<Minion> enemies) 
+	public RangedTower(Point pointIn, int widthIn, int heightIn, List<Minion> enemies, Point enemyBase, List<Tower> enemyTowers) 
 	{
-		super(pointIn, widthIn, heightIn, enemies);	
+		super(pointIn, widthIn, heightIn, enemies, enemyBase, enemyTowers);	
 	}
 	
 	public int removeHealth(int healthRemoved)
@@ -30,7 +30,7 @@ public class RangedTower extends Tower
 		if (count % (wait - level) == 0)
 		{
 			//TODO Implement RangedMinion. Using SplashMinion until then.
-			Minion minion = new SplashMinion(new Point(location.x, location.y), Math.PI/2, getEnemies(), Color.CYAN); //Added by Akshay
+			Minion minion = new SplashMinion(new Point(location.x, location.y), Math.PI/2, getEnemies(), enemyBase, enemyTowers, Color.CYAN); //Added by Akshay
 			return minion;
 		}
 		if (count == 100000000)

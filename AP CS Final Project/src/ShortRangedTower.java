@@ -13,9 +13,9 @@ public class ShortRangedTower extends Tower
 	public int width;
 	public int height;
 	
-	public ShortRangedTower(Point pointIn, int widthIn, int heightIn, List<Minion> enemies) 
+	public ShortRangedTower(Point pointIn, int widthIn, int heightIn, List<Minion> enemies, Point enemyBase, List<Tower> enemyTowers) 
 	{
-		super(pointIn, widthIn, heightIn, enemies);
+		super(pointIn, widthIn, heightIn, enemies, enemyBase, enemyTowers);
 	}
 	
 	public Minion spawn()
@@ -23,7 +23,7 @@ public class ShortRangedTower extends Tower
 		count ++;
 		if (count % (wait - level) == 0)
 		{
-			Minion minion = new MeleeMinion(new Point(location.x, location.y), Math.PI/2, getEnemies(), Color.RED); //Added by Akshay
+			Minion minion = new MeleeMinion(new Point(location.x, location.y), Math.PI/2, getEnemies(), enemyBase, enemyTowers, Color.RED); //Added by Akshay
 			return minion;
 		}
 		if (count == 100000000)
