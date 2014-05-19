@@ -14,7 +14,7 @@ public class SplashTower extends Tower
 	public int height;
 	public Color color = new Color(96, 130, 182);
 	
-	public SplashTower(Point pointIn, int widthIn, int heightIn, List<Minion> enemies, List<Tower> enemyTowers) 
+	public SplashTower(Point pointIn, int widthIn, int heightIn, List<Minion> enemies, List<Tower> enemyTowers)
 	{
 		super(pointIn, widthIn, heightIn, enemies, enemyTowers);
 	}
@@ -42,6 +42,6 @@ public class SplashTower extends Tower
 	
 	public void draw(Graphics g)
 	{
-		
+		g.fillRect(location.x, location.y, width, height, color);
 	}
 }
