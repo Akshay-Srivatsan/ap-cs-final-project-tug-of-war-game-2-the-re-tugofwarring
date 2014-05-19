@@ -13,17 +13,13 @@ public abstract class Tower
 	public int width;
 	public int height;
 	public List<Minion> enemyList;
-	public Point enemyBase;
-	public List<Tower> enemyTowers;
 	
-	public Tower(Point pointIn, int widthIn, int heightIn, List<Minion> enemies, Point enemyBaseIn, List<Tower> enemyTowersIn)	
+	public Tower(Point pointIn, int widthIn, int heightIn, List<Minion> enemies)	
 	{
 		location = pointIn;
 		width = widthIn;
 		height = heightIn;
 		enemyList = enemies;
-		enemyBase = enemyBaseIn;
-		enemyTowers = enemyTowersIn;
 	}
 	
 	public int removeHealth() //Modified by Akshay

@@ -54,7 +54,7 @@ public class World extends JFrame implements ActionListener, MouseListener, Mous
         setVisible(true);
         
         startTimer();
-        playerMinions.add(new SplashMinion(new Point(100, 100), Math.PI/4, enemyMinions, new Point(0,0), enemyTowers, Color.WHITE));
+//        playerMinions.add(new SplashMinion(new Point(100, 100), Math.PI/4, enemyMinions, Color.WHITE));
 	}
 	
 	public void startTimer()

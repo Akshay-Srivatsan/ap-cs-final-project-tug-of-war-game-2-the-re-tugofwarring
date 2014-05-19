@@ -8,9 +8,9 @@ public class SplashMinion extends MeleeMinion
 	private final int RANGE = 50;
 	private final int DAMAGE = 5;
 
-	public SplashMinion(Point loc, double dir, List<Minion> enemies, Point eb, List<Tower> et, Color color)
+	public SplashMinion(Point loc, double dir, List<Minion> enemies, Color color)
 	{
-		super(loc, dir, enemies, eb, et, color);
+		super(loc, dir, enemies, color);
 	}
 
 	public int getDamage()
