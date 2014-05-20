@@ -10,14 +10,13 @@ import java.util.List;
  * @author Akshay
  *
  */
-public abstract class Minion
+public abstract class Minion extends Actor
 {
 	private Point location;
 	private double direction;
 	private List<Minion> enemyList;
 	private Minion target;
 	private Color color;
-	private Point eb;
 	private List<Tower> et;
 
 	/**
@@ -30,12 +29,12 @@ public abstract class Minion
 	 * @param enemies
 	 *            The list of enemies.
 	 */
-	public Minion(Point loc, double dir, List<Minion> enemies, Point enemyBase, List<Tower> enemyTowers, Color color)
+	public Minion(Point loc, double dir, List<Minion> enemies, List<Tower> enemyTowers, Color color)
 	{
+		super(loc);
 		location = loc;
 		direction = dir;
 		enemyList = enemies;
-		eb = enemyBase;
 		et = enemyTowers;
 		setColor(color);
 	}
@@ -49,11 +48,6 @@ public abstract class Minion
 	public void setLocation(Point _location)
 	{
 		location = _location;
-	}
-	
-	public Point getEnemyBase()
-	{
-		return eb;
 	}
 	
 	public List<Tower> getEnemyTowers()
