@@ -211,9 +211,13 @@ public class World extends JFrame implements ActionListener, MouseListener, Mous
 		{
 			if(e.getY() < gridHeight-50)
 			{
+			    Tower t = null;
 				if (placeMelee == true)
-					MeleeTower t = new MeleeTower(new Point(e.getX() - 5, e.getY() - 5), 10, 10, enemyMinions);
-				towersArrayList.add(new Point(e.getX(), e.getY()));
+				{
+					t = new MeleeTower(new Point(e.getX() - 5, e.getY() - 5), 10, 10, enemyMinions, new Point(100,100), enemyTowers);
+				}
+				playerTowers.add(t);
+				//towersArrayList.add(new Point(e.getX(), e.getY()));
 			}
 			
 			placeMelee = false;
@@ -221,6 +225,46 @@ public class World extends JFrame implements ActionListener, MouseListener, Mous
 			placeSplash = false;
 		}
 	}
+
+    public static void killActor(Actor a)
+    {
+        int i = 0;
+        for (Actor b : enemyMinions)
+        {
+            if (b == a)
+            {
+                enemyMinions.remove(i);
+            }
+            i++;
+        }
+        i=0;
+        for (Actor b : playerMinions)
+        {
+            if (b == a)
+            {
+                playerMinions.remove(i);
+            }
+            i++;
+        }
+        i=0;
+        for (Actor b : enemyTowers)
+        {
+            if (b == a)
+            {
+                enemyTowers.remove(i);
+            }
+            i++;
+        }
+        i=0;
+        for (Actor b : playerTowers)
+        {
+            if (b == a)
+            {
+                enemyTowers.remove(i);
+            }
+            i++;
+        }
+    }
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {

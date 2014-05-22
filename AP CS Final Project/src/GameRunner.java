@@ -10,9 +10,8 @@ public class GameRunner
 	public static void main(String[] args)
 	{
 		w = new World(1200,800);
-		
-	        w.addMouseListener(w);
-	        w.addMouseMotionListener(w);
+	    w.addMouseListener(w);
+	    w.addMouseMotionListener(w);
 	}
 
 }

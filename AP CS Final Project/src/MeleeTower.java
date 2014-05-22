@@ -14,15 +14,19 @@ public class MeleeTower extends Tower
 	public int height;
 	public Color color = new Color(225, 255, 0);
 	
-	public MeleeTower(Point pointIn, int widthIn, int heightIn, List<Minion> enemies, List<Tower> enemyTowers) 
+	public MeleeTower(Point pointIn, int widthIn, int heightIn, List<Minion> enemies, Point enemyBase, List<Tower> enemyTowers) 
 	{
-		super(pointIn, widthIn, heightIn, enemies, enemyTowers);
+		super(pointIn, widthIn, heightIn, enemies, enemyBase, enemyTowers);
 	}
 	
-	public int removeHealth(int healthRemoved)
+	public void removeHealth(int healthRemoved)
 	{
 		health -= healthRemoved;
-		return health;
+	}
+	
+	public void die()
+	{
+	    World.killActor(this);
 	}
 	
 	public Minion spawn()
@@ -34,14 +38,20 @@ public class MeleeTower extends Tower
 		}
 		if (count % (wait - level) == 0)
 		{
-			Minion minion = new MeleeMinion(new Point(location.x, location.y), Math.PI/2, getEnemies(), color);
+			Minion minion = new MeleeMinion(new Point(location.x, location.y), Math.PI/2, getEnemies(), enemyBase, enemyTowers, color);
 			return minion;
 		}
 		return null;
 	}
 	
+	public int getHealth()
+	{
+	    return health;
+	}
+	
 	public void draw(Graphics g)
 	{
-		g.fillRect(location.x, location.y, width, height, color);
+	    g.setColor(color);
+		g.fillRect(location.x, location.y, width, height);
 	}
 }

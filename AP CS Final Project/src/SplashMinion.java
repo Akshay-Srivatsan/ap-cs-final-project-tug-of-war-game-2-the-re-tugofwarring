@@ -23,28 +23,52 @@ public class SplashMinion extends MeleeMinion
 	{
 		List<Minion> enemies = getEnemies();
 		ArrayList<Minion> enemiesInSight = new ArrayList<Minion>();
-		for(Minion enemy: enemies)
+		ArrayList<Tower> towersInSight = new ArrayList<Tower>();
+		for(Tower tower: buildings)
 		{
-			if(enemy.getLocation().distance(getLocation()) < sightRange)
+			if(tower.location.distance(getLocation()) < sightRange)
 			{
-				enemiesInSight.add(enemy);
+				towersInSight.add(tower);
 			}
 		}
-		if(enemiesInSight.size() > 0)
+		if(towersInSight.size() > 0)
 		{
-			Minion closestEnemy = enemiesInSight.get(0);
-			for(Minion enemy: enemiesInSight)
+			Tower closestTower = towersInSight.get(0);
+			for(Tower tower: towersInSight)
 			{
-				if(enemy.getLocation().distance(getLocation()) > closestEnemy.getLocation().distance(getLocation()))
+				if(tower.location.distance(getLocation()) > closestTower.location.distance(getLocation()))
 				{
-					closestEnemy = enemy;
+					closestTower = tower;
 				}
 			}
-			setTarget(closestEnemy);
+			super.setTarget(closestTower);
 		}
 		else
-		{
-			setTarget(null);
+	    {
+		    for(Minion enemy: enemies)
+		    {
+			    if(enemy.getLocation().distance(getLocation()) < sightRange)
+			    {
+				    enemiesInSight.add(enemy);
+			    }
+		    }
+		    if(enemiesInSight.size() > 0)
+		    {
+			    Minion closestEnemy = enemiesInSight.get(0);
+			    for(Minion enemy: enemiesInSight)
+			    {
+				    if(enemy.getLocation().distance(getLocation()) > closestEnemy.getLocation().distance(getLocation()))
+				    {
+					    closestEnemy = enemy;
+				    }
+			    }
+			    setTarget(closestEnemy);
+		    }
+		    else
+		    {
+			    setTarget(null);
+			    setDirection(super.directionTo(basePoint);
+		    }
 		}
 	}
 	
@@ -72,6 +96,11 @@ public class SplashMinion extends MeleeMinion
 		{
 			if (getLocation().distance(m.getLocation()) <= RANGE)
 				m.takeDamage(getDamage());
+		}
+		for (Tower t: getEnemyTowers())
+		{
+		    if(getLocation().distance(t.getLocation()) <= RANGE)
+		        t.takeDamage(2 * getDamage());
 		}
 	}
 	

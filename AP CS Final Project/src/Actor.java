@@ -11,4 +11,10 @@ public abstract class Actor
 	{
 		return loc;
 	}
+	
+	abstract public void removeHealth(int amount);
+	
+	abstract public void die();
+	
+	
 }

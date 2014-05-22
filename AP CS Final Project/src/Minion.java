@@ -15,7 +15,7 @@ public abstract class Minion extends Actor
 	private Point location;
 	private double direction;
 	private List<Minion> enemyList;
-	private Minion target;
+	private Actor target;
 	private Color color;
 	private List<Tower> et;
 
@@ -29,7 +29,7 @@ public abstract class Minion extends Actor
 	 * @param enemies
 	 *            The list of enemies.
 	 */
-	public Minion(Point loc, double dir, List<Minion> enemies, List<Tower> enemyTowers, Color color)
+	public Minion(Point loc, double dir, List<Minion> enemies, Point enemyBase, List<Tower> enemyTowers, Color color)
 	{
 		super(loc);
 		location = loc;
@@ -132,15 +132,15 @@ public abstract class Minion extends Actor
 	 *            The amount of damage to deal.
 	 * @return true iff the Minion died (health <= 0)
 	 */
-	public boolean takeDamage(int amount)
+	public void removeHealth(int amount)
 	{
 		setHealth(getHealth() - 1);
 		if (getHealth() <= 0)
 		{
 			die();
-			return true;
+			//return true;
 		}
-		return false;
+		//return false;
 	}
 
 	/**
@@ -171,7 +171,7 @@ public abstract class Minion extends Actor
 	 * 
 	 * @param m
 	 */
-	public void setTarget(Minion m)
+	public void setTarget(Actor m)
 	{
 		target = m;
 	}
@@ -181,7 +181,7 @@ public abstract class Minion extends Actor
 	 * 
 	 * @return the current target, or null if there is none
 	 */
-	public Minion getTarget()
+	public Actor getTarget()
 	{
 		return target;
 	}
