@@ -4,12 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-/***
-	Julian Christensen, Ian Loftis, Akshay Srivatsan, Josh Campbell
-	Description: The basic minion, close range, cheap, medium health, low damage
-	The idea was that this would counter the ranged minion by overtaking with many small minions, as the ranged
-	can only target one at a time.
-**/
+
 public class MeleeMinion extends Minion
 {
 	int health;
@@ -18,23 +13,15 @@ public class MeleeMinion extends Minion
 	int attackRange;
 	Color color;
 	int sightRange;
-	Point basePoint;
+	Point basePoint = new Point();
 	public MeleeMinion(Point loc, double dir, List<Minion> enemies, Point enemyBase, List<Tower> buildings, Color _color)
 	{
 		super(loc, dir, enemies, enemyBase, buildings, _color);
 		color = _color;
-		attackRange = getSize();
+		attackRange = 2;
 		sightRange = 200;
 		damage = 2;
-		setSpeed(3);
-		setHealth(20);
-		setMaxHealth(getHealth());
-		basePoint = enemyBase;
-	}
-
-	public int getRange()
-	{
-		return attackRange;
+		setSpeed(2);
 	}
 
 	@Override
@@ -64,16 +51,8 @@ public class MeleeMinion extends Minion
 	public void act()
 	{
 		Actor target = getTarget();
-
-		if(getEnemies().contains(target) || getEnemyTowers().contains(target))
+		if(target != null)
 		{
-			if (target instanceof Base)
-			{
-				Actor eb = target;
-				findTarget();
-				if (getTarget() == null)
-					target = eb;
-			}
 			setDirection(directionTo(target.getLocation()));
 			if(target.getLocation().distance(getLocation()) < attackRange)
 				attack();
@@ -83,28 +62,15 @@ public class MeleeMinion extends Minion
 		else
 		{
 			findTarget();
-			if(getTarget() == null)
-			{
-				setDirection(super.directionTo(basePoint));
-			}
 			move();
 		}
 	}
 
 	@Override
-	public void attack()
+	public void attack() 
 	{
 		Actor target = getTarget();
 		target.removeHealth(getDamage());
-		if(target.getHealth() <= 0)
-		{
-			if (getEnemies().contains(target))
-				target.die();
-			findTarget();
-		}
-		if (target instanceof Minion)
-		 	System.out.println(this + " did " + getDamage() + " damage to " + target + " at distance " + getLocation().distance(target.getLocation()) + "; " + target.getHealth() + " left");
-		
 	}
 	
 	public void findTarget()
@@ -116,7 +82,6 @@ public class MeleeMinion extends Minion
 		{
 			if(tower.location.distance(getLocation()) < sightRange)
 			{
-				//System.out.println("in sight");
 				towersInSight.add(tower);
 			}
 		}
@@ -127,11 +92,9 @@ public class MeleeMinion extends Minion
 			{
 				if(tower.location.distance(getLocation()) > closestTower.location.distance(getLocation()))
 				{
-					if (!tower.getLocation().equals(getEnemyBase()) || getEnemyTowers().size() == 0)
-						closestTower = tower;
+					closestTower = tower;
 				}
 			}
-			//System.out.println("found a closest Tower");
 			setTarget(closestTower);
 		}
 		else
@@ -140,7 +103,6 @@ public class MeleeMinion extends Minion
 		    {
 			    if(enemy.getLocation().distance(getLocation()) < sightRange)
 			    {
-			    	//System.out.println("enemy in sight");
 				    enemiesInSight.add(enemy);
 			    }
 		    }

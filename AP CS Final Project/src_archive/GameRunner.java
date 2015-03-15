@@ -1,7 +1,7 @@
-/***
-By: , Akshay, Ian, Josh, Julian
-Description: The wrapper class for World, just creates a World class instance.
-**/
+import javax.swing.Timer;
+import javax.xml.stream.events.StartDocument;
+
+
 public class GameRunner
 {
 
@@ -12,7 +12,6 @@ public class GameRunner
 		w = new World(1200,800);
 	    w.addMouseListener(w);
 	    w.addMouseMotionListener(w);
-	   
 	}
 
 }

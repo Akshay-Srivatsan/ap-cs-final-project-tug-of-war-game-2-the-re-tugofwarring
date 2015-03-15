@@ -5,17 +5,17 @@ import java.util.List;
 
 /***
 By: Josh, Julian, Akshay, Ian
-Description: A medium-cost tower which spawns MeleeMinions.
+Description: A low-cost tower which spawns DecoyMinions.
 **/
-public class MeleeTower extends Tower
+public class DecoyTower extends Tower
 {
 	public int health = 1000;
 	public int count = 0;
 	public int wait = 100;
 	public int level = 0;
-	public Color color = new Color(225, 255, 0);
+	public Color color = new Color(225, 255, 255);
 	
-	public MeleeTower(Point pointIn, int widthIn, int heightIn, List<Minion> enemies, Point enemyBase, List<Tower> enemyTowers) 
+	public DecoyTower(Point pointIn, int widthIn, int heightIn, List<Minion> enemies, Point enemyBase, List<Tower> enemyTowers) 
 	{
 		super(pointIn, widthIn, heightIn, enemies, enemyBase, enemyTowers);
 		setMaxHealth(health);
@@ -50,7 +50,7 @@ public class MeleeTower extends Tower
 		}
 		if (count % (wait - level) == 1)
 		{
-			Minion minion = new MeleeMinion(new Point(location), Math.PI, getEnemies(), enemyBase, enemyTowers, color);
+			Minion minion = new DecoyMinion(new Point(location), Math.PI, getEnemies(), enemyBase, enemyTowers, color);
 			return minion;
 		}
 		return null;

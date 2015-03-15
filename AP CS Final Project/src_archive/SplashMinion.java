@@ -4,37 +4,19 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-/***
-	Julian Christensen, Ian Loftis, Akshay Srivatsan, Josh Campbell
-	Description: A minion that does splash damage, high cost, high health, medium damage, medium range. Meant to counter 
-	the overpowering numbers of the melee minions by attacking many minions at a time. It spawns slowly and does extra damage
-	to towers.
-**/
 public class SplashMinion extends MeleeMinion
 {
 	private final int RANGE = 50;
 	private final int DAMAGE = 5;
-	int health = 35;
+
 	public SplashMinion(Point loc, double dir, List<Minion> enemies, Point enemyBase, List<Tower> buildings, Color _color)
 	{
 		super(loc, dir, enemies, enemyBase, buildings, _color);
-		super.setHealth(health);
-		super.setMaxHealth(health);
-	}
-
-	public int getSpeed()
-	{
-		return 2;
 	}
 
 	public int getDamage()
 	{
 		return DAMAGE;
-	}
-
-	public int getHealth()
-	{
-		return super.getHealth();
 	}
 	
 	public void findTarget()
@@ -42,7 +24,7 @@ public class SplashMinion extends MeleeMinion
 		List<Minion> enemies = getEnemies();
 		ArrayList<Minion> enemiesInSight = new ArrayList<Minion>();
 		ArrayList<Tower> towersInSight = new ArrayList<Tower>();
-		for(Tower tower: getEnemyTowers())
+		for(Tower tower: buildings)
 		{
 			if(tower.location.distance(getLocation()) < sightRange)
 			{
@@ -56,8 +38,7 @@ public class SplashMinion extends MeleeMinion
 			{
 				if(tower.location.distance(getLocation()) > closestTower.location.distance(getLocation()))
 				{
-					if (!tower.getLocation().equals(getEnemyBase()) || getEnemyTowers().size() == 0)
-						closestTower = tower;
+					closestTower = tower;
 				}
 			}
 			super.setTarget(closestTower);
@@ -86,20 +67,19 @@ public class SplashMinion extends MeleeMinion
 		    else
 		    {
 			    setTarget(null);
-			    setDirection(super.directionTo(basePoint));
+			    setDirection(super.directionTo(basePoint);
 		    }
 		}
 	}
 	
 	public void act()
 	{
-		Actor target = getTarget();
-
-		if(getEnemies().contains(target) || getEnemyTowers().contains(target))
+		Minion target = getTarget();
+		if(target != null)
 		{
 			setDirection(directionTo(target.getLocation()));
 			if(target.getLocation().distance(getLocation()) < attackRange)
-				target.removeHealth(DAMAGE);
+				target.attack();
 			else
 				move();
 		}
@@ -109,23 +89,18 @@ public class SplashMinion extends MeleeMinion
 			move();
 		}
 	}
-
-	public int getRange()
-	{
-		return RANGE;
-	}
 	
 	public void attack()
 	{
-		for (Minion m : getEnemies().toArray(new Minion[getEnemies().size()]))
+		for (Minion m : getEnemies())
 		{
 			if (getLocation().distance(m.getLocation()) <= RANGE)
-				m.removeHealth(getDamage());
+				m.takeDamage(getDamage());
 		}
-		for (Tower t: getEnemyTowers().toArray(new Tower[getEnemyTowers().size()]))
+		for (Tower t: getEnemyTowers())
 		{
 		    if(getLocation().distance(t.getLocation()) <= RANGE)
-		        t.removeHealth(2 * getDamage());
+		        t.takeDamage(2 * getDamage());
 		}
 	}
 	
